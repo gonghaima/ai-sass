@@ -13,3 +13,8 @@ Following https://ui.shadcn.com/docs/installation/next
 - default routing based on page.tsx at root
 - normal folder will come with url routes
 - name the folder with (), will omit current folder as path, but keep checking its child. e.g. (dashboard)/(routes)/dashboard/page.tsx, will be available via http://localhost:3000/dashboard
+
+
+
+53:35 video in progress
+CODE REF: /Users/stevengong/temp/tm8/ref/next13-ai-saas
