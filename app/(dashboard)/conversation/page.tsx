@@ -10,6 +10,7 @@ import { ChatCompletionRequestMessage } from 'openai';
 import { Heading } from '@/components/heading';
 import { Form, FormField, FormItem, FormControl } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { cn } from "@/lib/utils";
 
 import { formSchema } from './constants';
 import { Button } from '@/components/ui/button';
@@ -17,6 +18,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Empty } from '@/components/ui/empty';
 import { Loader } from '@/components/loader';
+import { UserAvatar } from '@/components/user-avatar';
+import { BotAvatar } from '@/components/bot-avatar';
 
 const ConversationPage = () => {
   const router = useRouter();
@@ -101,7 +104,18 @@ const ConversationPage = () => {
           )}
           <div className="flex flex-col-reverse gap-y-4">
             {messages.map((message) => (
-              <div key={message.content}>{message.content}</div>
+              <div 
+              key={message.content} 
+              className={cn(
+                "p-8 w-full flex items-start gap-x-8 rounded-lg",
+                message.role === "user" ? "bg-white border border-black/10" : "bg-muted",
+              )}
+            >
+              {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+              <p className="text-sm">
+                {message.content}
+              </p>
+            </div>
             ))}
           </div>
         </div>
