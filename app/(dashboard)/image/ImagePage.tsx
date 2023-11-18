@@ -1,28 +1,22 @@
 'use client';
-
 import axios from 'axios';
 import * as z from 'zod';
-import { ImageIcon, MessageSquare } from 'lucide-react';
+import { ImageIcon } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { Heading } from '@/components/heading';
 import { Form, FormField, FormItem, FormControl } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { cn } from '@/lib/utils';
-
 import { amountOptions, formSchema } from './constants';
 import { Button } from '@/components/ui/button';
-import { Select, SelectItem, SelectTrigger } from '@/components/ui/select';
+import { Select, SelectTrigger } from '@/components/ui/select';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Empty } from '@/components/ui/empty';
 import { Loader } from '@/components/loader';
-import { UserAvatar } from '@/components/user-avatar';
-import { BotAvatar } from '@/components/bot-avatar';
 import { SelectContent, SelectValue } from '@radix-ui/react-select';
 
-const ImagePage = () => {
+export const ImagePage = () => {
   const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
 
@@ -99,13 +93,7 @@ const ImagePage = () => {
                           <SelectValue defaultValue={field.value} />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
-                        {amountOptions.map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
+                      <SelectContent>{amountOptions}</SelectContent>
                     </Select>
                   </FormItem>
                 )}
@@ -134,5 +122,3 @@ const ImagePage = () => {
     </div>
   );
 };
-
-export default ImagePage;
