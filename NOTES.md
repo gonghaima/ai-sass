@@ -14,5 +14,5 @@ Following https://ui.shadcn.com/docs/installation/next
 - normal folder will come with url routes
 - name the folder with (), will omit current folder as path, but keep checking its child. e.g. (dashboard)/(routes)/dashboard/page.tsx, will be available via http://localhost:3000/dashboard
 
-2:28:20 video in progress (api)
+2:34:38 video in progress (api)
 CODE REF: /Users/stevengong/temp/tm8/ref/next13-ai-saas
