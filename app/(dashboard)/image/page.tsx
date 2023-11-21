@@ -2,7 +2,7 @@
 
 import axios from 'axios';
 import * as z from 'zod';
-import { ImageIcon, MessageSquare } from 'lucide-react';
+import { Download, ImageIcon, MessageSquare } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils';
 
 import { amountOptions, formSchema, resolutionOptions } from './constants';
 import { Button } from '@/components/ui/button';
+import { Card, CardFooter } from '@/components/ui/card';
 import { Select, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -21,6 +22,7 @@ import { Loader } from '@/components/loader';
 import { UserAvatar } from '@/components/user-avatar';
 import { BotAvatar } from '@/components/bot-avatar';
 import { SelectContent, SelectValue } from '@radix-ui/react-select';
+import Image from 'next/image';
 
 const ImagePage = () => {
   const router = useRouter();
@@ -42,7 +44,7 @@ const ImagePage = () => {
       setImages([]);
       const response = await axios.post('/api/image', values);
       const urls = response.data.map((image: { url: string }) => image.url);
-      setImages([urls]);
+      setImages(urls);
       form.reset();
     } catch (error) {
       // TODO: Open Pro Modal
@@ -164,7 +166,26 @@ const ImagePage = () => {
           {images.length === 0 && !isLoading && (
             <Empty label="No images generated." />
           )}
-          <div>Images will be rendered here</div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-8">
+            {images.length &&
+              images.map((src) => (
+                <Card key={src} className="rounded-lg overflow-hidden">
+                  <div className="relative aspect-square">
+                    <Image fill src={src} alt="Generated" />
+                  </div>
+                  <CardFooter className="p-2">
+                    <Button
+                      onClick={() => window.open(src)}
+                      variant="secondary"
+                      className="w-full"
+                    >
+                      <Download className="h-4 w-4 mr-2" />
+                      Download
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+          </div>
         </div>
       </div>
     </div>
@@ -172,3 +193,5 @@ const ImagePage = () => {
 };
 
 export default ImagePage;
+
+// src="https://picsum.photos/200/300"
