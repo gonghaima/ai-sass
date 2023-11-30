@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { FreeCounter } from "@/components/free-counter";
 
 const poppins = Montserrat({ weight: '600', subsets: ['latin'] });
 
@@ -94,6 +95,10 @@ const SideBar = () => {
           ))}
         </div>
       </div>
+      <FreeCounter 
+        apiLimitCount={2} 
+        isPro={false}
+      />
     </div>
   );
 };
