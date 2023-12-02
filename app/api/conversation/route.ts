@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import { Configuration, OpenAIApi } from 'openai';
 
 // import { checkSubscription } from '@/lib/subscription';
-// import { incrementApiLimit, checkApiLimit } from '@/lib/api-limit';
+import { incrementApiLimit, checkApiLimit } from '@/lib/api-limit';
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -31,15 +31,15 @@ export async function POST(req: Request) {
       return new NextResponse('Messages are required', { status: 400 });
     }
 
-    // const freeTrial = await checkApiLimit();
+    const freeTrial = await checkApiLimit();
     // const isPro = await checkSubscription();
 
-    // if (!freeTrial && !isPro) {
-    //   return new NextResponse(
-    //     'Free trial has expired. Please upgrade to pro.',
-    //     { status: 403 }
-    //   );
-    // }
+    if (!freeTrial) {
+      return new NextResponse(
+        'Free trial has expired. Please upgrade to pro.',
+        { status: 403 }
+      );
+    }
 
     /** Real */
     // const response = await openai.createChatCompletion({
@@ -60,6 +60,7 @@ export async function POST(req: Request) {
       },
     };
 
+    await incrementApiLimit();
     // if (!isPro) {
     //   await incrementApiLimit();
     // }

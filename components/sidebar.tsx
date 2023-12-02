@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import { FreeCounter } from "@/components/free-counter";
+import { FreeCounter } from '@/components/free-counter';
 
 const poppins = Montserrat({ weight: '600', subsets: ['latin'] });
 
@@ -62,7 +62,7 @@ const routes = [
   },
 ];
 
-const SideBar = () => {
+export const Sidebar = ({ apiLimitCount = 0 }: { apiLimitCount: number }) => {
   const pathname = usePathname();
   return (
     <div className="space-y-4 py-4 flex flex-col h-full bg-[#111827] text-white">
@@ -95,12 +95,9 @@ const SideBar = () => {
           ))}
         </div>
       </div>
-      <FreeCounter 
-        apiLimitCount={2} 
-        isPro={false}
-      />
+      <FreeCounter apiLimitCount={apiLimitCount} isPro={false} />
     </div>
   );
 };
 
-export default SideBar;
+export default Sidebar;
