@@ -20,9 +20,11 @@ import { Empty } from '@/components/ui/empty';
 import { Loader } from '@/components/loader';
 import { UserAvatar } from '@/components/user-avatar';
 import { BotAvatar } from '@/components/bot-avatar';
+import { useProModal } from '@/hook/use-pro-modal';
 
 const ConversationPage = () => {
   const router = useRouter();
+  const proModal = useProModal();
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -45,9 +47,12 @@ const ConversationPage = () => {
       });
       setMessages((current) => [...current, userMessage, response.data]);
       form.reset();
-    } catch (error) {
-      // TODO: Open Pro Modal
-      console.log(error);
+    } catch (error:any) {
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      } else {
+        // toast.error("Something went wrong.");
+      }
     } finally {
       router.refresh();
     }

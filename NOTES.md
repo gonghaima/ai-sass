@@ -18,5 +18,5 @@ Following https://ui.shadcn.com/docs/installation/next
 - ```npm i -D prisma```
 - ```npx prisma init```
 
-3:29:06 video in progress (api)
+4:04:35 video in progress (api)
 CODE REF: /Users/stevengong/temp/tm8/ref/next13-ai-saas
