@@ -21,6 +21,7 @@ export async function GET() {
       where: {
         userId,
       },
+      select: undefined
     });
 
     if (userSubscription && userSubscription.stripeCustomerId) {
