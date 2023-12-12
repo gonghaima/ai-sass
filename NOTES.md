@@ -18,5 +18,6 @@ Following https://ui.shadcn.com/docs/installation/next
 - ```npm i -D prisma```
 - ```npx prisma init```
 
-5:25:58 video in progress (api)
-CODE REF: /Users/stevengong/temp/tm8/ref/next13-ai-saas
+## deployed in vercel
+url
+https://ai-sass-gonghaima1.vercel.app/
